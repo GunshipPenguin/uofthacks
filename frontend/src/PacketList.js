@@ -4,12 +4,15 @@ import en from 'javascript-time-ago/locale/en';
 import TimeAgo from 'javascript-time-ago';
 import { Table } from 'reactstrap';
 
+TimeAgo.addLocale(en);
+const timeAgo = new TimeAgo('en-US');
+
 class PacketList extends React.Component {
     render() {
         if (this.props.packets == null) {
             return null;
         }
-        console.log(this.props.packets);
+
         const sortedPackets = JSON.parse(JSON.stringify(this.props.packets));
         sortedPackets.sort((a, b) => a.ts_sec < b.ts_sec);
 
@@ -35,12 +38,9 @@ class PacketList extends React.Component {
 }
 
 function tableItemFromPacket(packet) {
-    TimeAgo.addLocale(en);
-    const timeAgo = new TimeAgo('en-US');
-
     return (
         <tr>
-            <td>{timeAgo.format(new Date(packet.ts_sec * 1000))}</td>
+            <td>{timeAgo.format(new Date(packet.ts_sec * 1000), 'twitter')}</td>
             <td>{packet.sourcemac}</td>
             <td>{packet.destmac}</td>
             <td>Unknown</td>

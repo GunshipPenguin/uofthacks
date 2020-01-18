@@ -5,6 +5,9 @@ import en from 'javascript-time-ago/locale/en';
 import TimeAgo from 'javascript-time-ago';
 import { Table } from 'reactstrap';
 
+TimeAgo.addLocale(en);
+const timeAgo = new TimeAgo('en-US');
+
 class DeviceList extends React.Component {
     constructor(props) {
         super(props);
@@ -45,18 +48,16 @@ class DeviceList extends React.Component {
     }
 
     tableItemFromDevice(device) {
-        TimeAgo.addLocale(en);
-        const timeAgo = new TimeAgo('en-US');
-
         const manufacturer_long = oui(device.devmac);
         const manufacturer_short = manufacturer_long != null ? manufacturer_long.split('\n')[0] : "unknown";
 
         return (
             <tr>
-                <td onClick={() => this.props.onSelectMac(device.devmac)}>{device.devmac}</td>
+                <td className="clickableMac"
+                    onClick={() => this.props.onSelectMac(device.devmac)}>{device.devmac}</td>
                 <td>{manufacturer_short}</td>
-                <td>{timeAgo.format(new Date(device.first_time * 1000))}</td>
-                <td>{timeAgo.format(new Date(device.last_time* 1000))}</td>
+                <td>{timeAgo.format(new Date(device.first_time * 1000), 'twitter')}</td>
+                <td>{timeAgo.format(new Date(device.last_time* 1000), 'twitter')}</td>
                 <td>{device.strongest_signal + " db"}</td>
                 <td>{device.bytes_data}</td>
             </tr>
