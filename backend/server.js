@@ -17,7 +17,7 @@ app.get('/api/devices', (req, res) => {
 
 app.get('/api/packets/:mac', (req, res) => {
     const mac = req.params.mac;
-    db.all("SELECT ts_sec, sourcemac, destmac, frequency FROM packets WHERE sourcemac = ? ORDER BY ts_sec", [mac], (err, rows) => {
+    db.all("SELECT ts_sec, sourcemac, destmac, frequency, datasources.name as nodename FROM packets JOIN datasources ON datasources.uuid=packets.datasource WHERE sourcemac = ?", [mac], (err, rows) => {
         res.send(rows);
     })
 
