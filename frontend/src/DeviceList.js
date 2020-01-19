@@ -4,6 +4,7 @@ import oui from 'oui';
 import en from 'javascript-time-ago/locale/en';
 import TimeAgo from 'javascript-time-ago';
 import { Table } from 'reactstrap';
+import { Button } from 'reactstrap';
 
 TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo('en-US');
@@ -53,8 +54,8 @@ class DeviceList extends React.Component {
 
         return (
             <tr>
-                <td className="clickableMac"
-                    onClick={() => this.props.onSelectMac(device.devmac)}>{device.devmac}</td>
+                <td
+                    onClick={() => this.props.onSelectMac(device.devmac)}><Button className="clickable-mac">{device.devmac}</Button></td>
                 <td>{manufacturer_short}</td>
                 <td>{timeAgo.format(new Date(device.first_time * 1000), 'twitter')}</td>
                 <td>{timeAgo.format(new Date(device.last_time* 1000), 'twitter')}</td>
