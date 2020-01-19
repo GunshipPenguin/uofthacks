@@ -1,11 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import en from 'javascript-time-ago/locale/en';
-import TimeAgo from 'javascript-time-ago';
+import TimeAgo from './TimeAgo';
 import { Table } from 'reactstrap';
-
-TimeAgo.addLocale(en);
-const timeAgo = new TimeAgo('en-US');
 
 class PacketList extends React.Component {
     render() {
@@ -40,7 +36,7 @@ class PacketList extends React.Component {
 function tableItemFromPacket(packet) {
     return (
         <tr>
-            <td>{timeAgo.format(new Date(packet.ts_sec * 1000), 'twitter')}</td>
+            <td>{TimeAgo(packet.ts_sec)}</td>
             <td>{packet.sourcemac}</td>
             <td>{packet.destmac}</td>
             <td>Unknown</td>
