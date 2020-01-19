@@ -32,12 +32,17 @@ class PacketList extends React.Component {
     }
 }
 
+const nodename_to_location = {
+    "node1_wlan0": "SF Pit (upper)",
+    "node0_wlan0": "SF Pit (lower)"
+};
+
 function tableItemFromPacket(packet) {
     return (
         <tr>
             <td>{TimeAgo(packet.ts_sec)}</td>
             <td>{packet.destmac}</td>
-            <td>Unknown</td>
+            <td>{nodename_to_location[packet.nodename]}</td>
         </tr>
     );
 }
