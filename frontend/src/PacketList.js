@@ -19,7 +19,6 @@ class PacketList extends React.Component {
                     <thead>
                     <tr>
                         <th>Transmitted</th>
-                        <th>Source MAC</th>
                         <th>Dest. MAC</th>
                         <th>Location</th>
                     </tr>
@@ -37,7 +36,6 @@ function tableItemFromPacket(packet) {
     return (
         <tr>
             <td>{TimeAgo(packet.ts_sec)}</td>
-            <td>{packet.sourcemac}</td>
             <td>{packet.destmac}</td>
             <td>Unknown</td>
         </tr>
